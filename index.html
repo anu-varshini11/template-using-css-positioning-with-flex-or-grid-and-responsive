@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout with Sidebar Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            height: 100vh;
+            width: 100%;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            height: 100%;
+        }
+
+        nav .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .hero {
+            background: url('/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/scene.jpg') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .hero a {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .welcome {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .welcome h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .welcome p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .welcome .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .welcome .btn-group a {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .about {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            background-color: #f4f4f4;
+        }
+
+        .about .about-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .about .about-item img {
+            max-width: 100%;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .about .about-item h3 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .about .about-item p {
+            color: #555;
+        }
+
+        .features {
+            padding: 40px 20px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .features h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        .features .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .features .feature-item {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .features .feature-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .features .feature-item p {
+            color: #555;
+        }
+
+        .portfolio {
+            padding: 40px 20px;
+            background-color: #f4f4f4;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .portfolio .portfolio-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio .portfolio-item {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio .portfolio-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .portfolio .portfolio-item p {
+            color: #555;
+        }
+
+        .contact {
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+
+        .contact h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact form input, .contact form textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .contact form input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: #bbb;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        footer .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: row;
+                height: auto;
+                padding: 10px;
+            }
+
+            .content {
+                flex: 1;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .features .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio .portfolio-items {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/logo.png" alt="Flomic Logo">
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+
+
+            <section class="hero">
+                <h1>Welcome to Our Responsive Layout</h1>
+                <p>Flomic Logistics - Your Reliable Transport Partner</p>
+                <a href="#">Learn More</a>
+            </section>
+
+            <section class="welcome">
+                <h2>Welcome to Template</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis.</p>
+                <div class="btn-group">
+                    <a href="#">Learn More</a>
+                    <a href="#">Get Started</a>
+                </div>
+            </section>
+
+            <section class="about">
+                <div class="about-item">
+                    <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/p1.jpg" alt="Person 1">
+                    <h3>Customer Service</h3>
+                    <p>We provide the best customer service in the industry.</p>
+                </div>
+                <div class="about-item">
+                    <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/p2.jpg" alt="Person 2">
+                    <h3>Teamwork</h3>
+                    <p>We work together to meet the needs of our customers and to help the company win.</p>
+                </div>
+                <div class="about-item">
+                    <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/p3.jpg" alt="Person 3">
+                    <h3>Innovation</h3>
+                    <p>We innovate to create solutions that are beneficial to our customers and community.</p>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2>Our Features</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>Responsive Design</h3>
+                        <p>Our layouts adapt to any screen size, providing a seamless user experience.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Fast Performance</h3>
+                        <p>Enjoy fast loading times and smooth interactions on all devices.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Secure Data</h3>
+                        <p>We prioritize the security and privacy of your data above all else.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="portfolio">
+                <h2>Our Portfolio</h2>
+                <div class="portfolio-items">
+                    <div class="portfolio-item">
+                        <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/picture.jpeg" alt="Project 1">
+                        <p>Project Description 1</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/picture.jpeg" alt="Project 2">
+                        <p>Project Description 2</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/picture.jpeg" alt="Project 3">
+                        <p>Project Description 3</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="/project-4-using-CSS-Positioning-with-flex-or-grid-and-responsive/images/picture.jpeg" alt="Project 4">
+                        <p>Project Description 4</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact">
+                <h2>Contact Us</h2>
+                <form action="#">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea placeholder="Message" rows="4" required></textarea>
+                    <input type="submit" value="Send Message">
+                </form>
+            </section>
+
+            <footer>
+                <p>&copy; 2024 Flomic Logistics Pvt. Ltd. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
